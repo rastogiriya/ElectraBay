@@ -11,7 +11,7 @@ const Header = () => {
           <LinkContainer to="/">
             <Navbar.Brand>
               <img src={logo} alt="ProShop" />
-              Proshop
+              ElectraBay
             </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -24,7 +24,7 @@ const Header = () => {
                 </Nav.Link>
               </LinkContainer>
               <LinkContainer to="/login">
-                <Nav.Link >
+                <Nav.Link>
                   <FaUser />
                   Sign In
                 </Nav.Link>
