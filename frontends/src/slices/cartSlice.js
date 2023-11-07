@@ -1,9 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, isFluxStandardAction } from "@reduxjs/toolkit";
 import { updateCart } from "../utils/cartUtils";
 
 const initialState = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart"))
-  : { cartItems: [] };
+  : { cartItems: [] ,shippingAddress:{},paymentMethod:'PayPal'};
 
 const cartSlice = createSlice({
   name: "cart",
@@ -33,11 +33,19 @@ const cartSlice = createSlice({
 
       return updateCart(state);
     },
+    saveShippingAddress:(state,action)=>{
+      state.shippingAddress=isFluxStandardAction.payload;
+      return updateCart(state);
+    },
+savePaymentMethod:(state,action)=>{
+  state.paymentMethod=action.payload;
+  return updateCart(state);
+}
   },
 });
 
 //every function we create need to be exported as action
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart,saveShippingAddress,savePaymentMethod } = cartSlice.actions;
 
 export default cartSlice.reducer;
