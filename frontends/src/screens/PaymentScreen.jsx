@@ -17,13 +17,13 @@ const PaymentScreen = () => {
 
   useEffect(() => {
     if (!shippingAddress) {
-      navigate("/Shipping");
+      navigate("/shipping");
     }
   }, [shippingAddress, navigate]);
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(savePaymentMethod(paymentMethod));
-    navigate("/placeholder");
+    navigate("/placeorder");
   };
 
   return (
@@ -38,7 +38,7 @@ const PaymentScreen = () => {
               type="radio"
               className="my-2"
               label="PayPal or Credit Card"
-              id="Paypal"
+              id="PayPal"
               name="paymentMethod"
               value="PayPal"
               checked
