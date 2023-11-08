@@ -13,17 +13,17 @@ const PaymentScreen = () => {
   const navigate = useNavigate();
 
   const cart = useSelector((state) => state.cart);
-  const { ShippingAddress } = cart;
+  const { shippingAddress } = cart;
 
   useEffect(() => {
-    if (!ShippingAddress) {
+    if (!shippingAddress) {
       navigate("/Shipping");
     }
-  }, [ShippingAddress, navigate]);
+  }, [shippingAddress, navigate]);
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(savePaymentMethod(paymentMethod));
-    navigate("/placeholder");
+    navigate("/placeorder");
   };
 
   return (

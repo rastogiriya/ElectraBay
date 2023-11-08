@@ -8,16 +8,16 @@ import CheckoutSteps from "../components/CheckoutSteps";
 
 const ShippingScreen = () => {
   const cart = useSelector((state) => state.cart);
-  const { ShippingAddress } = cart;
+  const { shippingAddress } = cart;
 
-  const [address, setAddress] = useState(ShippingAddress?.address) || "";
+  const [address, setAddress] = useState(shippingAddress?.address) || "";
 
-  const [city, setCity] = useState(ShippingAddress?.city) || "";
+  const [city, setCity] = useState(shippingAddress?.city) || "";
 
   const [postalCode, setPostalCode] =
-    useState(ShippingAddress?.postalCode) || "";
+    useState(shippingAddress?.postalCode) || "";
 
-  const [country, setCountry] = useState(ShippingAddress?.country) || "";
+  const [country, setCountry] = useState(shippingAddress?.country) || "";
 
   const navigate = useNavigate();
   const dispatch = useDispatch();

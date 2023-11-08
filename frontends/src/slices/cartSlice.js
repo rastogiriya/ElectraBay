@@ -34,18 +34,28 @@ const cartSlice = createSlice({
       return updateCart(state);
     },
     saveShippingAddress:(state,action)=>{
-      state.shippingAddress=isFluxStandardAction.payload;
+      state.shippingAddress = action.payload;
       return updateCart(state);
     },
 savePaymentMethod:(state,action)=>{
   state.paymentMethod=action.payload;
   return updateCart(state);
+},
+clearCartItems:(state,action)=>{
+  state.cartItems=[];
+  return updateCart(state); 
 }
   },
 });
 
 //every function we create need to be exported as action
 
-export const { addToCart, removeFromCart,saveShippingAddress,savePaymentMethod } = cartSlice.actions;
+export const {
+  addToCart,
+   removeFromCart,
+   saveShippingAddress,
+   savePaymentMethod ,
+   clearCartItems,  
+  } = cartSlice.actions;
 
 export default cartSlice.reducer;
