@@ -47,13 +47,13 @@ const PlaceOrderScreen = () => {
   <Row>
     <Col md={8}>
         <ListGroup variant='flush'>
-            <ListGroupItem>
+            <ListGroup.Item>
                 <h2>Shipping</h2>
                 <p>
                     <strong>Address:</strong>
                     {cart.shippingAddress.address},{cart.shippingAddress.city}{cart.shippingAddress.poastalCode},{cart.shippingAddress.country}
                 </p>
-            </ListGroupItem>
+            </ListGroup.Item>
 
 
             <ListGroup.Item>
@@ -91,12 +91,15 @@ const PlaceOrderScreen = () => {
             </ListGroup.Item>
         </ListGroup>
     </Col>
+    
     <Col md={4}>
         <Card>
             <ListGroup variant='flush'>
                 <ListGroup.Item>
+                    
                     <h2>Order Summary</h2>
                 </ListGroup.Item>
+
                 <ListGroup.Item>
                     <Row>
                     <Col>Items:</Col>
@@ -134,14 +137,14 @@ const PlaceOrderScreen = () => {
                 </ListGroup.Item>
 
                 <ListGroup.Item>
-        {  error && <Message variant='danger'>{error}</Message> }
+             { error && <Message variant='danger'>{error}</Message> }
                 </ListGroup.Item>
 
                 <ListGroup.Item>
                     <Button 
                     type='button'
                     className='btn-block'
-                    disabled={cart.cartItems===0 }
+                    disabled={cart.cartItems.length===0 }
                     onClick={placeOrderHandler}
                     >
                         Place Order
