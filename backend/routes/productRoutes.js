@@ -1,6 +1,12 @@
 import express from "express";
-const router=express.Router();
-import { getProducts,getProductById } from "../controllers/productControllers.js";
+const router = express.Router();
+import {
+  getProducts,
+  getProductById,
+  createProduct,
+  updateProduct,
+} from "../controllers/productControllers.js";
+import { protect, admin } from "../middleware/authMiddleware.js";
 //import asyncHandler from "../middleware/asyncHandler.js";
 //import Product from "../models/productModel.js";
 //import products from '../data/products.js';
@@ -26,6 +32,6 @@ import { getProducts,getProductById } from "../controllers/productControllers.js
 // })
 // );
 
-router.route('/').get(getProducts);
-router.route('/:id').get(getProductById);
+router.route("/").get(getProducts).post(protect, admin, createProduct);
+router.route("/:id").get(getProductById).put(protect, admin, updateProduct);
 export default router;
