@@ -5,8 +5,24 @@ import Product from "../models/productModel.js";
 //@route get/api/products
 //@access public
 const getProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({});
-  res.json(products);
+  const pageSize = 8;
+  const page = Number(req.query.pageNumber) || 1;
+
+  const keyword = req.query.keyword
+    ? {
+        name: {
+          $regex: req.query.keyword,
+          $options: "i",
+        },
+      }
+    : {};
+
+  const count = await Product.countDocuments({ ...keyword });
+
+  const products = await Product.find({ ...keyword })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+  res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
 
 //@desc fetch a products
@@ -93,13 +109,14 @@ const createProductReview = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
 
   if (product) {
-    const alreadyReviewedIndex = product.reviews.findIndex(
+    const alreadyReviewed = product.reviews.find(
       // review whose user ID matches with current user id
       (review) => review.user.toString() === req.user._id.toString()
     );
 
-    if (alreadyReviewedIndex !== -1) {
-      product.reviews.splice(alreadyReviewedIndex, 1);
+    if (alreadyReviewed) {
+      res.status(400);
+      throw new Error("Product already reviewed");
     }
 
     const review = {
@@ -118,10 +135,7 @@ const createProductReview = asyncHandler(async (req, res) => {
       product.reviews.length;
 
     await product.save();
-
-    if (alreadyReviewedIndex !== -1)
-      res.status(201).json({ message: "Review updated" });
-    else res.status(201).json({ message: "Review added" });
+    res.status(201).json({ message: "Review added" });
   } else {
     res.status(404);
     throw new Error("Product not found");
@@ -134,7 +148,7 @@ const createProductReview = asyncHandler(async (req, res) => {
 const getTopProducts = asyncHandler(async (req, res) => {
   const products = await Product.find({}).sort({ rating: -1 }).limit(4);
 
-  res.json(products);
+  res.status(200).json(products);
 });
 
 export {
