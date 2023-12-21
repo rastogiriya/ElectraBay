@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 
 const ProductListScreen = () => {
   const { data: products, isLoading, error, refetch } = useGetProductsQuery();
+  console.log(products);
   const [createProduct, { isLoading: loadingCreate }] =
     useCreateProductMutation();
 
