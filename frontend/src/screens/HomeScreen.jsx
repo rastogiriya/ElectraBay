@@ -6,7 +6,6 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import Paginate from "../components/Paginate";
 import ProductCarousel from "../components/ProductCarousel";
-import Meta from "../components/Meta";
 
 const HomeScreen = () => {
   const { pageNumber, keyword } = useParams();

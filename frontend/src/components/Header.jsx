@@ -1,12 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import {
-  Badge,
-  Navbar,
-  Nav,
-  Container,
-  NavbarBrand,
-  NavDropdown,
-} from "react-bootstrap";
+import { Badge, Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useLogoutMutation } from "../slices/usersApiSlice";
 import { logout } from "../slices/authSlice";
@@ -40,7 +33,7 @@ const Header = () => {
         <Container>
           <LinkContainer to="/">
             <Navbar.Brand>
-              <img src={logo} alt="ProShop" />
+              <img src={logo} alt="ElectraBay" style={{ width: "60px" }} />
               ElectraBay
             </Navbar.Brand>
           </LinkContainer>
@@ -50,8 +43,7 @@ const Header = () => {
               <SearchBox />
               <LinkContainer to="/cart">
                 <Nav.Link>
-                  <FaShoppingCart />
-                  Cart
+                  <FaShoppingCart /> Cart
                   {cartItems.length > 0 && (
                     <Badge pill bg="success" style={{ marginLeft: "5px" }}>
                       {cartItems.reduce((a, c) => a + c.qty, 0)}
@@ -71,8 +63,7 @@ const Header = () => {
               ) : (
                 <LinkContainer to="/login">
                   <Nav.Link href="/login">
-                    <FaUser />
-                    Sign In
+                    <FaUser /> Sign In
                   </Nav.Link>
                 </LinkContainer>
               )}

@@ -1,4 +1,4 @@
-import { createSlice, isFluxStandardAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { updateCart } from "../utils/cartUtils";
 
 const initialState = localStorage.getItem("cart")

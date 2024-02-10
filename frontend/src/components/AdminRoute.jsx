@@ -1,5 +1,5 @@
 import { Outlet, Navigate } from "react-router-dom";
-import { UseSelector, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const AdminRoutes = () => {
   const { userInfo } = useSelector((state) => state.auth);
